@@ -274,8 +274,8 @@ static TPConnectionsManager * _connectionsManager = nil;
 	NSString * remoteAddress = [tcpSocket remoteAddress];
 	TPRemoteHost * remoteHost = [[TPHostsManager defaultManager] hostWithAddress:remoteAddress];
 	if(remoteHost == nil) {
-		NSLog(@"could not determine which host has IP %@, will use encrypted connection by default", remoteAddress);
-		return YES; // encrypted by default
+		NSLog(@"could not determine which host has IP %@, will not use encrypted connection by default", remoteAddress);
+		return NO; // no encryption by default
 	}
 	else {
 		return [[TPLocalHost localHost] pairWithHost:remoteHost hasCapability:TPHostEncryptionCapability];
