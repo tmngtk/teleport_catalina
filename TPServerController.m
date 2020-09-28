@@ -222,9 +222,11 @@ static TPServerController * _defaultServerController = nil;
 	screenPlacement.origin.x += NSMinX(sharedScreenFrame);
 	screenPlacement.origin.y += NSMinY(sharedScreenFrame);
 	
-	_clientHotBorder = [[TPHotBorder alloc] initWithRepresentingRect:screenPlacement inRect:sharedScreenFrame];
-	[self setupHotBorder:_clientHotBorder forHost:host];
-	[_clientHotBorder setDelegate:self];
+	if (! _clientHotBorder) {
+		_clientHotBorder = [[TPHotBorder alloc] initWithRepresentingRect:screenPlacement inRect:sharedScreenFrame];
+		[self setupHotBorder:_clientHotBorder forHost:host];
+		[_clientHotBorder setDelegate:self];
+	}
 	[_clientHotBorder delayedActivate];
 	
 	[[self eventsController] startPostingEvents];
