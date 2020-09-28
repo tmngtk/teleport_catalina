@@ -143,6 +143,13 @@ static TPMainController * _mainController = nil;
 #if 0
 	[TPTestsController runFakeHostsTest];
 #endif
+	
+	/* Stay awake for network connection */
+    if ([[NSProcessInfo processInfo] respondsToSelector:@selector(beginActivityWithOptions:reason:)]) {
+		static id _activity = nil;
+		_activity = [[NSProcessInfo processInfo] beginActivityWithOptions:0x00FFFFFFULL reason:@"receiving connection"];
+    }
+
 #endif
 }
 
